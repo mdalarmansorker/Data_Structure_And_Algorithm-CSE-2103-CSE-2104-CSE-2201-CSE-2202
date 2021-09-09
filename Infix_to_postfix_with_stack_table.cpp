@@ -15,6 +15,7 @@ int main()
         co++;
         cout<<co<<": Stack: "<<'('<<endl;
         cout<<"Expression: "<<endl;
+        cout<<"Description: Start"<<endl;
         int i=0;
         int j=0;
         for(i=0;i<temp.length();i++)
@@ -38,21 +39,37 @@ int main()
                         a+=am.top();
                         am.pop();
                         amt.pop_back();
+                        if(am.top()==temp[i])
+                            cout<<"Description: "<<"'^' is equal to '^"<<endl;
+                        else
+                            cout<<"Description: "<<"'^' is greater than "<<temp[i]<<endl;
                     }
                     else if((am.top()=='*' or am.top()=='/') and temp[i]!='^')
                     {
+                        char t1=am.top();
+                        char t2=temp[i];
                         a+=am.top();
                         am.pop();
                         amt.pop_back();
+                        
+                        /*if(t1==t2)
+                            cout<<"Description: "<<"'"<<t1<<"' is equal to '"<<t1<<"'"<<endl;
+                        else
+                            cout<<"Description: "<<"'"<<t1<<"' is greater than '"<<t2<<"'"<<endl;*/
                     }
                     else if((am.top()=='+' or am.top()=='-') and temp[i]!='^' and temp[i]!='*' and temp[i]!='/')
                     {
+                        /*if(am.top()==temp[i])
+                            cout<<"Description: "<<"'"<<am.top()<<"' is equal to '"<<am.top()<<"'"<<endl;
+                        else
+                            cout<<"Description: "<<"'"<<am.top()<<"' is greater than '"<<temp[i]<<"'"<<endl;*/
                         a+=am.top();
                         am.pop();
                         amt.pop_back();
                     }
                     else
                     {
+                        
                         am.push(temp[i]);
                         amt.push_back(temp[i]);
                         break;
@@ -76,6 +93,7 @@ int main()
                     cout<<co<<": Stack: "<<s<<endl;
                     cout<<"Expression: "<<a<<endl;
         }
+        cout<<"Description: End"<<endl;
        std::cout<<"Postfix Notation: "<<a<<endl;
     return 0;
 }
