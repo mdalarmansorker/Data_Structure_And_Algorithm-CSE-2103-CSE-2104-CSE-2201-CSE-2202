@@ -1,150 +1,106 @@
 #include<bits/stdc++.h>
 using namespace std;
-void traverse(int* a,int n)
+void traverse(int *a,int &n)
 {
-    cout<<"The Array is: ";
+    cout<<"Array: ";
     for(int i=0;i<n;i++)
         cout<<a[i]<<" ";
     cout<<endl;
 }
-void insert_first(int item, int* a, int &n)
+void insert_middle(int *a, int &n, int position, int element)
 {
-    int temp = a[0];
-    a[0] = item;
-    for(int i=1;i<n+1;i++)
+    int index = position - 1;
+    n++;
+    for(int i=n-1;i>index;i--)
     {
-        int temp2 = a[i];
-        a[i] = temp;
-        temp = temp2;
+        a[i]=a[i-1];
     }
-    n++;
-    cout<<"Item inserted successfully\n";
+    a[index] = element;
 }
-void insert_last(int*a, int &n)
+void insert_first(int *a,int &n)
 {
-    int item;
-    cout<<"Insert the item: ";
-    cin>>item;
-    a[n] = item;
-    n++;
-    cout<<"Inserted in the last successfully\n";
+    int element;
+    cout<<"Insert new element to add on first: ";
+    cin>>element;
+    insert_middle(a,n,1,element);
+    cout<<"Inserting in first position successfull\n";
 }
-void insert_in_position(int item, int position,int* a, int &n)
+void insert_last(int *a,int &n)
 {
-    
-    position--;
-    int temp = a[position];
+    int element;
+    cout<<"Insert new element to add on last: ";
+    cin>>element;
     n++;
-    a[position] = item;
-    for(int i=position+1;i<n;i++)
+    a[n-1]=element;
+    cout<<"Inserting in last position successfull\n";
+}
+void update(int *a,int position, int element)
+{
+    a[position-1]=element;
+    cout<<"Updating element complete";
+}
+int search(int *a,int &n,int element)
+{
+    for(int i=0;i<n;i++)
     {
-        int temp2 = a[i];
-        a[i] = temp;
-        temp = temp2;
+        if(a[i]==element)
+            return i;
     }
-    cout<<"Inserted in the position successsfully\n";
+    return -1;
 }
-void update(int*a,int &n)
+void delete_last(int *a, int &n)
 {
-    int item, position;
-    cout<<"Updating item position: ";
-    cin>>position;
-    position--;
-    cout<<"Item: ";
-    cin>>item;
-    a[position] = item;
+    a[n-1] = '\0';
+    n--;
+    cout<<"Last element deleted\n";
 }
-void delete_first(int *a,int &n)
+void delete_first(int *a, int &n)
 {
     for(int i=0;i<n-1;i++)
     {
         a[i]=a[i+1];
     }
+    a[n-1]='\0';
     n--;
-    cout<<"First Item deleted successfully\n";
+    cout<<"First element deleted\n";
 }
-void delete_position(int *a,int &n)
+void delete_middle(int *a, int &n, int position)
 {
-    int position;
-    cout<<"Insert the item position to delete it: ";
-    cin>>position;
-    position--;
-    for(int i=position;i<n-1;i++)
+    for(int i=position-1;i<n-1;i++)
     {
         a[i]=a[i+1];
     }
-    a[n-1] = '\0';
+    a[n-1]='\0';
     n--;
-    cout<<"First Item deleted successfully\n";
+    cout<<"Element deleted\n";
 }
-void delete_last(int*a,int &n)
-{
-    a[n-1] = '\0';
-    n--;
-    cout<<"Last item deleted successfully\n";
-}
-int search(int item,int*a, int &n)
-{
-    int position = -1;
-    for(int i=0;i<n;i++)
-    {
-        if(a[i] == item)
-        {
-            position = i;
-            break;
-        }
-    }
-    
-}
-void insert_before_item(int* a, int &n)
-{
-    int item;
-    cout<<"Insert the item to add before the position: ";
-    cin>>item;
-    int position = search(item, a, n);
-    insert_in_position(item, position, a, n);
-}
+
 int main()
 {
     int arr[100000];
     int n;
-    cout<<"Size of the array: ";
+    cout<<"Insert array size: ";
     cin>>n;
-    cout<<"Enter the array: ";
+    cout<<"Insert the array: ";
     for(int i=0;i<n;i++)
-        cin>>arr[i];
-    traverse(arr,n);
-    int item;
-    cout<<"Item insert in the first: ";
-    cin>>item;
-    insert_first(item,arr,n);
-    traverse(arr, n);
-    insert_last(arr,n);
-    traverse(arr,n);
-    int item;
-    int position;
-    cout<<"Item: ";
-    cin>>item;
-    cout<<"Position: ";
-    cin>>position;
-    insert_in_position(item, position, arr, n);
-    traverse(arr,n);
-    update(arr, n);
-    traverse(arr, n);
+        cin>>arr[i]; 
     delete_first(arr,n);
-    traverse(arr, n);
-    delete_position(arr,n);
-    traverse(arr, n);
-    delete_last(arr,n);
-    traverse(arr, n);
-    int item;
-    cout<<"Search item: ";
-    cin>>item;
-    int position = search(item, arr, n);
-    if(position == -1)
-        cout<<"Item not found\n";
-    else
-        cout<<"Item's Index: "<<position<<endl;
-
+    traverse(arr,n);
+    // cout<<"Searching element: ";
+    // int e;
+    // cin>>e;
+    // int index = search(arr,n,e);
+    // if(index != -1)
+    //     cout<<"Found. Position = "<<index+1<<endl;
+    // else
+    //     cout<<"Not found"<<endl;
+    // traverse(arr,n);
+    // insert_first(arr,n);
+    // traverse(arr,n);
+    // insert_last(arr,n);
+    // traverse(arr,n);
+    // insert_middle(arr,n,3,59);
+    // traverse(arr,n);
+    
     return 0;
 }
