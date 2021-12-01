@@ -33,7 +33,7 @@ def kruskal():
             mst_weight += w
             union_set(parent_u, parent_v)
 
-    print("MST Weight: %d.", mst_weight)
+    print("MST Weight: ", mst_weight)
     for element in selected_edge:
         print(element)
 

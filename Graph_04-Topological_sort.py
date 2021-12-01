@@ -4,6 +4,10 @@ def dfs(u):
     color[u] = 'gray'
 
     for element in adj[u]:
+        if color[element] == 'gray':
+            print("Cycle Detected")
+            isCycle = True
+            exit()
         if color[element] == 'white':
             dfs(element)
         
